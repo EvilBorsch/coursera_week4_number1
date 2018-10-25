@@ -17,7 +17,7 @@ class File:
             return line
 
     def __add__(self, other):
-        tempdir=tempfile.gettempprefix()
+        tempdir = os.path.join(tempfile.gettempdir(), 'storage.data')
         with open(self.path,'r') as f:
             temp_data=f.readlines()
         with open (tempdir,'w') as f:
