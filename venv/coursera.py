@@ -1,15 +1,17 @@
 class File:
     def __init__(self,path):
         self.path=path
+        self.current_position=0
     def __iter__(self):
         return self
     def __next__(self):
         with open(self.path,'r') as f:
-            if (f.readline() != None):
-                return f.readline()
-            else:
+            f.seek(self.current_position)
+            line=f.readline()
+            if not line:
                 raise StopIteration
-
+            self.current_position=f.tell()
+            return line
     def write(self,String):
         with open(self.path,'w') as f:
             try:
