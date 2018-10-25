@@ -17,7 +17,7 @@ class File:
             return line
 
     def __add__(self, other):
-        tempdir=f"C:\PythonFiles\TestFile.txt"
+        tempdir=tempfile.gettempprefix()
         with open(self.path,'r') as f:
             temp_data=f.readlines()
         with open (tempdir,'w') as f:
