@@ -1,14 +1,31 @@
-class SquareIterator:
-    def __init__(self,current,end):
-        self.current=current
-        self.end=end
+class File:
+    def __init__(self,path):
+        self.path=path
     def __iter__(self):
         return self
     def __next__(self):
-        if self.current-1 >= self.end:
-            raise StopIteration
-        result=self.current ** 2
-        self.current += 1
-        return result
-for i in SquareIterator(1,5):
-    print(i)
+        with open(self.path,'r') as f:
+            if (f.readline() != None):
+                return f.readline()
+            else:
+                raise StopIteration
+
+    def write(self,String):
+        with open(self.path,'w') as f:
+            try:
+                f.write(String)
+            except(TypeError):
+                print("TYPE ERROR")
+    def __str__(self):
+        return self.path
+
+
+path=f"C:\PythonFiles\log.txt"
+obj = File(path)
+obj.write("""newTest ahsdjk 
+fksjSad TESTTEST test
+test
+""")
+for line in obj:
+    print(line)
+print(obj)
