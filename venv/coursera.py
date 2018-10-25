@@ -17,13 +17,13 @@ class File:
             return line
 
     def __add__(self, other):
-        tempdir = os.path.join(tempfile.gettempdir(), 'storage.data')
+        tempdir = os.path.join(tempfile.gettempdir(), 'tempfile')
         with open(self.path,'r') as f:
-            temp_data=f.readlines()
+            temp_data=f.read()
         with open (tempdir,'w') as f:
-            f.writelines(temp_data)
+            f.write(temp_data)
             for line in other:
-                f.writelines(line)
+                f.write(line)
         return File(tempdir)
 
     def write(self,String):
@@ -34,7 +34,7 @@ class File:
                 print("TYPE ERROR")
     def read(self):
         with open(self.path,'r') as f:
-            return f.readlines()
+            return f.read()
     def __str__(self):
         return self.path
 
@@ -49,4 +49,5 @@ test
 obj2=File(other)
 print(obj2)
 new_obj=obj+obj2
+print(new_obj)
 print((new_obj.read()))
